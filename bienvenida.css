@@ -44,3 +44,50 @@ body {
   opacity: 0;
   text-align: center;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+}
+
+.bubble {
+  position: absolute;
+  background-color: #cccccc;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+
+.bienvenido {
+  position: relative;
+  font-size: 4rem; /* Aumenta el tamaño de la fuente */
+  color: #333333;
+  z-index: 100;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.nombre {
+  position: relative;
+  font-size: 3rem;
+  color: #333333;
+  z-index: 100;
+  opacity: 0;
+  text-align: center;
+}
