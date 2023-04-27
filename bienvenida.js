@@ -1,5 +1,7 @@
 const container = document.querySelector(".container");
 const nombre = document.querySelector(".nombre");
+const apellido = document.querySelector(".apellido");
+const organizacion = document.querySelector(".organizacion");
 let nombres = new Set();
 let colaNombres = [];
 let animacionEnProgreso = false;
@@ -9,10 +11,11 @@ async function actualizarNombres() {
     const response = await fetch("http://localhost:6969/api/guests");
     const data = await response.json();
 
-    data.forEach((nombre) => {
-      if (!nombres.has(nombre)) {
-        nombres.add(nombre);
-        colaNombres.push(nombre);
+    data.forEach((invitado) => {
+      const nombreCompleto = `${invitado.nombre} ${invitado.apellido}`;
+      if (!nombres.has(nombreCompleto)) {
+        nombres.add(nombreCompleto);
+        colaNombres.push(invitado);
       }
     });
 
@@ -23,44 +26,6 @@ async function actualizarNombres() {
     console.error(error);
   }
 }
-
-function procesarNombres() {
-  if (colaNombres.length > 0) {
-    const nombreActual = colaNombres.shift();
-    animacionEnProgreso = true;
-    mostrarNombre(nombreActual);
-  } else {
-    animacionEnProgreso = false;
-  }
-}
-
-function mostrarNombre(nombreActual) {
-  nombre.textContent = nombreActual;
-  anime({
-    targets: nombre,
-    translateY: [-50, 0],
-    opacity: [0, 1],
-    duration: 1000,
-    easing: "easeOutCubic",
-    complete: function () {
-      setTimeout(() => {
-        anime({
-          targets: nombre,
-          translateY: [0, -50],
-          opacity: [1, 0],
-          duration: 1000,
-          easing: "easeInCubic",
-          complete: procesarNombres,
-        });
-      }, 3000);
-    },
-  });
-}
-
-function vaciarNombres() {
-  nombres.clear();
-}
-
 for (let i = 0; i < 50; i++) {
   const bubble = document.createElement("div");
   bubble.classList.add("bubble");
@@ -82,7 +47,6 @@ bubbles.forEach((bubble, index) => {
   bubble.style.animationDuration = `${2 + delay}s`;
   bubble.style.animationDelay = `${delay}s`;
 });
-
 setInterval(actualizarNombres, 1000);
 setInterval(vaciarNombres, 7000);
 actualizarNombres();
@@ -96,3 +60,42 @@ anime({
   easing: "easeInOutQuad",
   duration: () => anime.random(6000, 10000),
 });
+function procesarNombres() {
+  if (colaNombres.length > 0) {
+    const invitadoActual = colaNombres.shift();
+    animacionEnProgreso = true;
+    mostrarNombre(invitadoActual);
+  } else {
+    animacionEnProgreso = false;
+  }
+}
+
+function vaciarNombres() {
+  nombres.clear();
+}
+function mostrarNombre(invitadoActual) {
+  nombre.textContent = invitadoActual.nombre.toUpperCase();
+  apellido.textContent = invitadoActual.apellido.toUpperCase();
+  organizacion.textContent = invitadoActual.organizacion.toUpperCase();
+
+  // Aquí puedes agregar las animaciones que desees para apellido y organizacion
+  anime({
+    targets: [nombre, apellido, organizacion],
+    translateY: [-50, 0],
+    opacity: [0, 1],
+    duration: 1000,
+    easing: "easeOutCubic",
+    complete: function () {
+      setTimeout(() => {
+        anime({
+          targets: [nombre, apellido, organizacion],
+          translateY: [0, -50],
+          opacity: [1, 0],
+          duration: 1000,
+          easing: "easeInCubic",
+          complete: procesarNombres,
+        });
+      }, 3000);
+    },
+  });
+}
