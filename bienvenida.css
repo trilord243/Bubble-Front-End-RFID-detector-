@@ -6,52 +6,6 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #ffffff; /* Fondo en color blanco */
-  overflow: hidden;
-}
-
-.container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  padding: 0;
-}
-.bubble {
-  position: absolute;
-  background-color: #cccccc;
-  opacity: 0.7;
-  border-radius: 50%;
-}
-
-.bienvenido {
-  position: relative;
-  font-size: 2.5rem;
-  color: #333333;
-  z-index: 100;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.nombre {
-  position: relative;
-  font-size: 3rem;
-  color: #333333;
-  z-index: 100;
-  opacity: 0;
-  text-align: center;
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
   background-color: #ffffff;
   overflow: hidden;
 }
@@ -60,11 +14,12 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Cambia a flex-start para mover el contenido hacia arriba */
   align-items: center;
   height: 100vh;
   width: 100vw;
   padding: 0;
+  padding-top: 10%;
 }
 
 .bubble {
@@ -76,16 +31,64 @@ body {
 
 .bienvenido {
   position: relative;
-  font-size: 4rem; /* Aumenta el tamaño de la fuente */
+  font-size: 13rem;
   color: #333333;
   z-index: 100;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 4rem;
 }
 
 .nombre {
   position: relative;
-  font-size: 3rem;
+  font-size: 7rem;
+  color: #333333;
+  z-index: 100;
+  opacity: 0;
+  text-align: center;
+}
+
+.logo-top-left {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  max-width: 1000px;
+  z-index: 100;
+}
+
+.logo-top-right {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 700px;
+  z-index: 100;
+}
+
+.logo-bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  z-index: 100;
+}
+.name-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.organizacion {
+  margin-top: 20px;
+  opacity: 0;
+  position: relative;
+  font-size: 4rem;
+  color: #333333;
+  z-index: 100;
+  font-style: italic;
+  text-align: center;
+}
+.apellido {
+  position: relative;
+  font-size: 7rem;
   color: #333333;
   z-index: 100;
   opacity: 0;
